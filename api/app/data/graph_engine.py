@@ -34,8 +34,9 @@ def build_and_save_graph(csv_path: str, graphml_path: str):
     crime_weights = valid_crimes['RISK_SCORE'].values
     tree = cKDTree(crime_coords)
 
-    print("[*] Downloading Washington D.C. walk network from OSM...")
-    G = ox.graph_from_place('Washington, D.C., USA', network_type='walk')
+    print("[*] Downloading Washington D.C. central walk network from OSM (1.5km radius)...")
+    # Central DC coordinates (around White House/Downtown)
+    G = ox.graph_from_point((38.8977, -77.0365), dist=1500, network_type='walk')
 
     print("[*] Calculating safety costs for all streets...")
     for u, v, key, data in G.edges(keys=True, data=True):
