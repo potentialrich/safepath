@@ -1,0 +1,14 @@
+
+> safepath-fresh@0.0.0 build
+> vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 72 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                          0.96 kB │ gzip:   0.53 kB
+dist/assets/index-C1s4nSQZ.css          42.32 kB │ gzip:   7.60 kB
+dist/assets/NavigationApp-Vu6bAOPU.js  172.22 kB │ gzip:  39.90 kB
+dist/assets/index-ClXStDwO.js          415.70 kB │ gzip: 142.42 kB
+✓ built in 971ms

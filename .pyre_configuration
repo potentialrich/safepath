@@ -1,0 +1,12 @@
+{
+  "source_directories": [
+    "api"
+  ],
+  "search_path": [
+    "/Users/aeyeter/safepath-fresh/api/venv/lib/python3.13/site-packages"
+  ],
+  "site_package_search_strategy": "all",
+  "site_roots": [
+    "/Users/aeyeter/safepath-fresh/api/venv/lib/python3.13/site-packages"
+  ]
+}

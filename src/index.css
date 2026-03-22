@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: dark;
+    /* SafePath Core Design Tokens */
+    --color-bg-base: #10082B;
+    --color-bg-surface: #20104D;
+    --color-bg-overlay: #0B162C;
+    --color-bg-card: #13233F;
+    
+    --color-primary: #FF4A9A;
+    --color-primary-rgb: 255, 74, 154;
+    --color-primary-hover: #E63B2E;
+    
+    --color-accent: #00D4FF;
+    --color-accent-blue: #00F0FF;
+    --color-accent-yellow: #FFB800;
+    
+    --color-danger: #EB5757;
+    --color-success: #10B981;
+    
+    --color-text-main: #FFFFFF;
+    --color-text-muted: #E2F1FF;
+    --color-text-subtle: rgba(226, 241, 255, 0.6);
+    --color-text-pink: #FFD2E8;
+
+    --color-border-subtle: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    @apply bg-background text-primary antialiased overflow-x-hidden;
+    /* Native App Feel Adjustments */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Allow text selection in inputs and textareas */
+  input, textarea {
+    -webkit-user-select: auto;
+    user-select: auto;
+  }
+}
+
+@layer utilities {
+  .noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.05;
+  }
+}

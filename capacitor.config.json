@@ -1,0 +1,9 @@
+{
+  "appId": "com.safepath.app",
+  "appName": "SafePath",
+  "webDir": "dist",
+  "server": {
+    "url": "http://192.168.6.5:5173",
+    "cleartext": true
+  }
+}
