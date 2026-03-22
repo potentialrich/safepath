@@ -34,8 +34,8 @@ def aco_pathfinder(G, start_coord, end_coord, num_ants=10, iterations=5):
                 probs = []
                 for n in unvisited:
                     edge = G[current][n][0]
-                    tau = edge.get('pheromone', 1.0)
-                    eta = 1.0 / edge.get('safety_cost', 1.0) 
+                    tau = float(edge.get('pheromone', 1.0))
+                    eta = 1.0 / float(edge.get('safety_cost', 1.0))
                     probs.append(tau * (eta ** 3)) # High sensitivity to danger
 
                 if not probs: break
@@ -44,7 +44,7 @@ def aco_pathfinder(G, start_coord, end_coord, num_ants=10, iterations=5):
                 
                 next_node = random.choices(unvisited, weights=[p/total for p in probs])[0]
                 
-                cost += G[current][next_node][0].get('safety_cost', 1.0)
+                cost += float(G[current][next_node][0].get('safety_cost', 1.0))
                 path.append(next_node)
                 visited.add(next_node)
                 current = next_node
@@ -55,10 +55,10 @@ def aco_pathfinder(G, start_coord, end_coord, num_ants=10, iterations=5):
                     best_cost, best_path = cost, path
 
         # Pheromone Update (Evaporation + Deposit)
-        for u, v, k, data in G.edges(keys=True, data=True): data['pheromone'] *= 0.7 
+        for u, v, k, data in G.edges(keys=True, data=True): data['pheromone'] = float(data.get('pheromone', 1.0)) * 0.7 
         for p, p_cost in all_paths:
             for i in range(len(p) - 1):
-                G[p[i]][p[i+1]][0]['pheromone'] += (1000.0 / p_cost)
+                G[p[i]][p[i+1]][0]['pheromone'] = float(G[p[i]][p[i+1]][0].get('pheromone', 1.0)) + (1000.0 / p_cost)
 
     if not best_path: # Fallback to Dijkstra if ants get trapped
         print("[!] ACO failed to converge, falling back to Dijkstra shortest path (weighted by safety)")

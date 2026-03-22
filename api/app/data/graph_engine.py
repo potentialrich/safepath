@@ -55,6 +55,14 @@ def load_graph_from_disk(csv_path: str, graphml_path: str):
     """Load the pre-built graph from disk (fast, low memory)."""
     print(f"[*] Loading pre-built graph from {graphml_path}...")
     G = ox.load_graphml(filepath=graphml_path)
+    
+    # Cast custom attributes from string to float globally
+    for u, v, k, data in G.edges(keys=True, data=True):
+        if 'safety_cost' in data:
+            data['safety_cost'] = float(data['safety_cost'])
+        if 'pheromone' in data:
+            data['pheromone'] = float(data['pheromone'])
+
     print("[*] Loading crime data...")
     df = pd.read_csv(csv_path)
     df['RISK_SCORE'] = df.apply(lambda row: 5 if str(row.get('METHOD', '')).upper() in ['GUN', 'KNIFE'] else 1, axis=1)
