@@ -7,3 +7,4 @@ osmnx
 networkx
 asyncio
 pydantic-settings
+scikit-learn
