@@ -1,3 +1,4 @@
+import threading
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
@@ -18,5 +19,12 @@ app.include_router(api_router)
 
 @app.on_event("startup")
 async def startup_event():
-    # Pass the CSV path from settings
-    initialize_graph_engine(settings.CRIME_CSV_PATH)
+    # Run the heavy graph loading in a background thread so the server
+    # can bind its port immediately (critical for Render's port detection).
+    thread = threading.Thread(
+        target=initialize_graph_engine,
+        args=(settings.CRIME_CSV_PATH,),
+        daemon=True
+    )
+    thread.start()
+    print("[*] Graph engine loading in background thread...")
